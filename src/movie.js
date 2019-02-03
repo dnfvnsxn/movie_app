@@ -3,7 +3,6 @@ import "./movie.css"
 
 class Movie extends Component{
     render(){
-        console.log(this.props);
         return(
             <div>
             <MoviePoater poster = {this.props.poster}/>

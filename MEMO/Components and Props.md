@@ -12,6 +12,7 @@
 
 ## App.js 컴포넌트 기본형
 - 이 곳에 영화내용, 정보등을 삽입할 것
+- App.js
 ```js
 import React, { Component } from 'react';
 
@@ -121,6 +122,7 @@ export default Movie
 - 부모 컴포넌트인 App.js에는 movieTitles, movieImages 데이터가 존재
 - **메인 컴포넌트가 데이터를 모두 가지고 있으며 각 컴퍼넌트는 props를 이용해 전달받은 정보를 출력**
 - 이 데이터를 자식 컴포넌트인 Movie에게 title과 poster요소로 넘겨줌
+- App.js
 ```js
 
 const Movietitles = [
@@ -154,13 +156,13 @@ class App extends Component {
 - Movie 컴포넌트는 각 데이터를 this.props.title과 this.props.poster란 이름으로 엑세스
 - Movie 컴포넌트는 poster데이터를 다시 MoviePoater컴포넌트에게 넘겨줌
 - MoviePoater컴포넌트는 poster데이터에 this.props.poster란 이름으로 엑세스하여 출력
+- Movie.js
 ```js
 import React, {Component} from "react"
 import "./movie.css"
 
 class Movie extends Component{
     render(){
-        console.log(this.props);
         return(
             <div>
             <MoviePoater poster = {this.props.poster}/>
@@ -181,3 +183,40 @@ class MoviePoater extends Component{
 export default Movie
 ```
 - ```<h1>{this.props.title}</h1>``` <- JSX의 경우 실행시키려면 {}가 필요
+
+## Lists with .map
+- App.js
+```js
+const movies = [
+    {
+        title: "Matrix",
+        poster: "http://ojsfile.ohmynews.com/down/images/1/ctzxp_249945_1[363282].jpg"
+    },
+    {
+        title: "Full Metal Jacket",
+        poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Full_Metal_Jacket_poster.jpg/220px-Full_Metal_Jacket_poster.jpg"
+    },
+    {
+        title: "Oldboy",
+        poster: "https://i.ebayimg.com/images/g/cE4AAOSwdW9Z77tX/s-l300.jpg"
+    },
+    {
+        title: "Star Wars",
+        poster: "https://imgc.allpostersimages.com/img/print/u-g-F69FKX0.jpg?w=300&h=450"
+    }
+]
+
+class App extends Component {
+    render() {
+        return (
+        <div className="App">
+            {movies.map((movie,index) => {
+            return <Movie title = {movie.title} poster = {movie.poster} key={index}/>
+            })}
+        </div>
+        );
+    }
+}
+```
+- map을 활용하여 새로운 array 생성
+- 리액트는 array값이 많을 경우 고유한 key값이 필요
