@@ -88,14 +88,14 @@ class Movie extends Component{
     render(){
         return(
             <div>
-            <MoviePoater/>
+            <MoviePoster/>
             <h1> This is movie</h1>
             </div>
         )
     }
 }
 
-class MoviePoater extends Component{
+class MoviePoster extends Component{
     render(){
         return(
             <img src="http://image.cine21.com/resize/cine21/poster/2015/1124/18_18_34__56542b6a6febf[X230,330].jpg"/>
@@ -154,8 +154,8 @@ class App extends Component {
 }
 ```
 - Movie 컴포넌트는 각 데이터를 this.props.title과 this.props.poster란 이름으로 엑세스
-- Movie 컴포넌트는 poster데이터를 다시 MoviePoater컴포넌트에게 넘겨줌
-- MoviePoater컴포넌트는 poster데이터에 this.props.poster란 이름으로 엑세스하여 출력
+- Movie 컴포넌트는 poster데이터를 다시 MoviePoster컴포넌트에게 넘겨줌
+- MoviePoster컴포넌트는 poster데이터에 this.props.poster란 이름으로 엑세스하여 출력
 - Movie.js
 ```js
 import React, {Component} from "react"
@@ -165,14 +165,14 @@ class Movie extends Component{
     render(){
         return(
             <div>
-            <MoviePoater poster = {this.props.poster}/>
+            <MoviePoster poster = {this.props.poster}/>
             <h1>{this.props.title}</h1>
             </div>
         )
     }
 }
 
-class MoviePoater extends Component{
+class MoviePoster extends Component{
     render(){
         return(
             <img src={this.props.poster} alt="poster"/>
@@ -182,7 +182,7 @@ class MoviePoater extends Component{
 
 export default Movie
 ```
-- ```<h1>{this.props.title}</h1>``` <- JSX의 경우 실행시키려면 {}가 필요
+- `<h1>{this.props.title}</h1>` <- JSX의 경우 실행시키려면 {}가 필요
 
 ## Lists with .map
 - App.js
@@ -237,14 +237,14 @@ class Movie extends Component{
     render(){
         return(
             <div>
-            <MoviePoater poster = {this.props.poster}/>
+            <MoviePoster poster = {this.props.poster}/>
             <h1>{this.props.title}</h1>
             </div>
         )
     }
 }
 
-class MoviePoater extends Component{
+class MoviePoster extends Component{
 
     static propTypes = {
         poster: PropTypes.string.isRequired
