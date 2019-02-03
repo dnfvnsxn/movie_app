@@ -220,3 +220,74 @@ class App extends Component {
 ```
 - map을 활용하여 새로운 array 생성
 - 리액트는 array값이 많을 경우 고유한 key값이 필요
+
+## Validating Props with PropTypes
+- Props의 형식 확인
+- 부모 컴포넌트에게서 받는 정보의 종류가 무엇인지 체크
+- .isRequired를 통해 필수로 제공되어야 하는 Props인지 를 확인
+- movie.js
+```js
+class Movie extends Component{
+
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired
+    }
+
+    render(){
+        return(
+            <div>
+            <MoviePoater poster = {this.props.poster}/>
+            <h1>{this.props.title}</h1>
+            </div>
+        )
+    }
+}
+
+class MoviePoater extends Component{
+
+    static propTypes = {
+        poster: PropTypes.string.isRequired
+    }
+
+    render(){
+        return(
+            <img src={this.props.poster} alt="poster"/>
+        )
+    }
+}
+```
+
+## React Component Lifecycle
+- 컴포넌트는 여러 기능들을 정해진 순서대로 실행
+- 컴포넌트는 많은 functions를 가지고 있고 그들은 순서대로, 자동으로 작동
+- 이 cycle은 자동으로 발생
+## Render
+- Render를 통해 컴포넌트를 띄울떄, 이 순서로 진행
+    1. componentWillMount()
+    2. render()
+    3. componentDidMount()
+- 컴포넌트가 존재하기 시작하면 리액트 세계는 위 cycle을 진행
+- 예시: 영화앱
+    1. componentWillMount()
+        - api에 작업을 요청
+        - api에 요청한 작업이 완료되면 데이터와 관련된 작업을 수행
+    2. render()
+    3. componentDidMount()
+- cycle을 통해 알 수 있는 것
+    1. componentWillMount()
+        - 사이클이 시작되었음을 알 수 있음
+    2. render()
+        - 컴포넌트가 리액트 세계에 존재하게 되었음
+    3. componentDidMount()
+        - 성공적으로 리액트 세계에 컴포넌트가 자리잡음
+## Update
+1. componentWillReceiveProps()
+    - 컴포넌트가 세로운 props을 받았다는 의미
+2. shouldComponentUpdate()
+    - 리액트는 old props와 new props를 살펴본 다음, old와 new가 다르면 'shouldComponentUpdate() == true'라고 생각하여 업데이트가 발생
+3. componentWillUpdate()
+4. render()
+5. componentDidUpdate()
+
+
