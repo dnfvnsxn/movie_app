@@ -4,40 +4,31 @@ import Movie from './movie';
 
 class App extends Component {
 
-  state = { 
-  }
+  state = {}
 
   componentDidMount(){
-    setTimeout(() =>{
-        this.setState({
-          movies: [
-            {
-              title: "Matrix",
-              poster: "http://ojsfile.ohmynews.com/down/images/1/ctzxp_249945_1[363282].jpg"
-            },
-            {
-              title: "Full Metal Jacket",
-              poster: "https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Full_Metal_Jacket_poster.jpg/220px-Full_Metal_Jacket_poster.jpg"
-            },
-            {
-              title: "Oldboy",
-              poster: "https://i.ebayimg.com/images/g/cE4AAOSwdW9Z77tX/s-l300.jpg"
-            },
-            {
-              title: "Star Wars",
-              poster: "https://imgc.allpostersimages.com/img/print/u-g-F69FKX0.jpg?w=300&h=450"
-            }
-          ]
-        })
-      }
-    ,2000)
+    this._getMovies();
   }
 
   _renderMovies = () =>{
-    const movies = this.state.movies.map((movie,index) => {
-      return <Movie title = {movie.title} poster = {movie.poster} key={index}/>
+    const movies = this.state.movies.map(movie => {
+      return <Movie title = {movie.title} poster = {movie.large_cover_image} key={movie.id}/>
     })
     return movies
+  }
+
+  _getMovies = async() =>{
+    const movies = await this._callApi()
+    this.setState({
+      movies
+    })
+  }
+
+  _callApi = () => {
+    return fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+      .then(response => response.json())
+      .then(json => json.data.movies)
+      .catch(err => console.log(err))
   }
 
   render() {
